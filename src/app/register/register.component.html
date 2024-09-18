@@ -1,8 +1,6 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-50 m-auto">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
   <div class="form-group">
-    <label class="form-label" for="productName">
-      {{ "Name" | uppercase }}</label
-    >
+    <label class="form-label" for="name">{{ "Name" | uppercase }}</label>
     <input
       type="text"
       class="form-control"
@@ -11,90 +9,108 @@
       name="name"
       formControlName="name"
     />
-    @if(name?.invalid && name?.touched){ @if(name?.hasError('required')) {
-    <p class="form-text text-danger">Name is required</p>
-    } } @if(name?.hasError('minlength')) {
-    <p class="form-text text-danger">Name must be at least 3 characters long</p>
-    }
+    <div *ngIf="name?.invalid && name?.touched">
+      <div *ngIf="name?.hasError('required')" class="form-text text-danger">
+        Name is required
+      </div>
+      <div *ngIf="name?.hasError('minlength')" class="form-text text-danger">
+        Name must be at least 3 characters long
+      </div>
+    </div>
   </div>
-  <div class="form-group my-3">
+
+  <div class="form-group">
     <label class="form-label" for="email">{{ "Email" | uppercase }}</label>
     <input
       type="email"
-      name="email"
-      id="email"
       class="form-control"
-      name="email"
+      id="email"
+      placeholder="Enter Email"
       formControlName="email"
     />
-    @if(email?.invalid && email?.touched){ @if(email?.hasError('required')) {
-    <p class="form-text text-danger">Email is required</p>
-    } } @if(email?.hasError('email')) {
-    <p class="form-text text-danger">invalid Email</p>
-    }
+    <div *ngIf="email?.invalid && email?.touched">
+      <div *ngIf="email?.hasError('required')" class="form-text text-danger">
+        Email is required
+      </div>
+      <div *ngIf="email?.hasError('email')" class="form-text text-danger">
+        Invalid email format
+      </div>
+    </div>
   </div>
+
   <div class="form-group">
     <label class="form-label" for="userName">{{
-      "userName" | uppercase
+      "Username" | uppercase
     }}</label>
     <input
       type="text"
-      name="userName"
-      id="userName"
       class="form-control"
-      name="userName"
+      id="userName"
+      placeholder="Enter Username"
       formControlName="userName"
     />
-    @if(userName?.invalid && userName?.touched){
-    @if(userName?.hasError('required')) {
-    <p class="form-text text-danger">User Name is required</p>
-    } } @if(userName?.hasError('userName')) {
-    <p class="form-text text-danger">User Name must not have spaces</p>
-    }
+    <div *ngIf="userName?.invalid && userName?.touched">
+      <div *ngIf="userName?.hasError('required')" class="form-text text-danger">
+        Username is required
+      </div>
+      <div *ngIf="userName?.hasError('userName')" class="form-text text-danger">
+        Username must not have spaces
+      </div>
+    </div>
   </div>
-  <div class="form-group my-3">
+
+  <div class="form-group">
     <label class="form-label" for="password">{{
       "Password" | uppercase
     }}</label>
     <input
       type="password"
-      name="password"
-      id="password"
       class="form-control"
-      name="password"
+      id="password"
+      placeholder="Enter Password"
       formControlName="password"
     />
-    @if(password?.invalid && password?.touched){
-    @if(password?.hasError('required')) {
-    <p class="form-text text-danger">Password is required</p>
-    } @if(password?.hasError('pattern')) {
-    <p class="form-text text-danger">
-      Password must be at least 8 characters long, one lowercase , one uppercase
-      , at least one digit and special character
-    </p>
-    } }
+    <div *ngIf="password?.invalid && password?.touched">
+      <div *ngIf="password?.hasError('required')" class="form-text text-danger">
+        Password is required
+      </div>
+      <div *ngIf="password?.hasError('pattern')" class="form-text text-danger">
+        Password must be at least 8 characters, include uppercase, lowercase, a
+        digit, and a special character
+      </div>
+    </div>
   </div>
+
   <div class="form-group">
     <label class="form-label" for="confirmPassword">{{
       "Confirm Password" | uppercase
     }}</label>
     <input
       type="password"
-      name="confirmPassword"
-      id="confirmPassword"
       class="form-control"
-      name="confirmPassword"
+      id="confirmPassword"
+      placeholder="Confirm Password"
       formControlName="confirmPassword"
     />
-    @if(confirmPassword?.invalid && confirmPassword?.touched){
-    @if(confirmPassword?.hasError('required')) {
-    <p class="form-text text-danger">Confirm Password is required</p>
-    } @if(confirmPassword?.hasError('mustMatch')) {
-    <p class="form-text text-danger">Passwords must match</p>
-    } }
+    <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+      <div
+        *ngIf="confirmPassword?.hasError('required')"
+        class="form-text text-danger"
+      >
+        Confirm Password is required
+      </div>
+      <div
+        *ngIf="confirmPassword?.hasError('mustMatch')"
+        class="form-text text-danger"
+      >
+        Passwords must match
+      </div>
+    </div>
   </div>
+
   <button type="submit" class="btn btn-primary mt-3 w-100">Register</button>
 </form>
+
 <p class="text-center">
   Already have an account?
   <a routerLink="/login" class="text-decoration-underline">Login</a>
